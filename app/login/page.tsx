@@ -1,10 +1,7 @@
 'use client'
 
 import React from "react";
-import { Card, Box, CardContent, Input } from "@/components";
-// import TextField from "@/components/input/textfield";
-// import { Button } from "@/components/button";
-// import { AccountCircle } from "@/icons";
+import { Card, Box, CardContent, Input, Button } from "@/components";
 import { usePageLogin } from "@/hooks";
 import { CssProps } from "@/interfaces";
 import { AccountCircle } from "@/icons";
@@ -15,10 +12,6 @@ const BoxMainStyle: CssProps = {
   alignItems: "center",
   justifyContent: "center",
   backgroundImage: 'linear-gradient(180deg, #ff81ff 0, #fd74ff 16.67%, #c465ff 33.33%, #8953f2 50%, #4e40cb 66.67%, #0030a7 83.33%, #002286 100%)',
-  // '@media (max-width: 768px)': {
-  //   paddingLeft: 0,
-  //   paddingRight: 0,
-  // }
 }
 
 const CardStyle: CssProps = {
@@ -28,12 +21,12 @@ const CardStyle: CssProps = {
   backgroundColor: `rgba(255, 255, 255, 0.4)`,
   borderRadius: '2px',
   padding: '1px',
-  boxShadow: '1px',
-  // '@media (max-width: 768px)': {
-  //   width: '100%',
-  //   height: '100vh',
-  //   padding: 0
-  // }
+  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+  '@media (max-width: 768px)': {
+    width: '100%',
+    height: '100vh',
+    padding: 0,
+  },
 }
 
 const CardContentStyle: CssProps = {
@@ -46,7 +39,10 @@ const CardContentStyle: CssProps = {
 
 const FieldStyle: CssProps = {
   width: '100%',
-  textAlign: 'center'
+  textAlign: 'center',
+  'svg': {
+    color: 'purple',
+  }
 }
 
 const Login = () => {
@@ -65,40 +61,25 @@ const Login = () => {
             </Box>
             <Box css={FieldStyle}>
               <Input
-                // fullWidth
-                label="username"
-                // requ/ired
-                // focused
-                // color="secondary"
-                // label="User"
-                // name="username"
-                autoComplete="username"
+                label="Username"
+                messageError="Campo obrigatorio"
+                type="text"
+                name="username"
                 placeholder="Digite..."
               />
             </Box>
             <Box css={FieldStyle}>
-              {/* <TextField
-                fullWidth
-                required
-                color="secondary"
-                focused
+              <Input
                 label="Password"
-                type="password"
+                type="text"
                 name="password"
-                autoComplete="current-password"
-                placeholder="*******"
-              /> */}
+                placeholder="Digite..."
+              />
             </Box>
             <Box css={FieldStyle}>
-              {/* <Button
-                fullWidth
-                type="submit"
-                variant="contained"
-                color="secondary"
-                size="large"
-              >
-                Login
-              </Button> */}
+              <Button type="submit">
+                Sign in
+              </Button>
             </Box>
           </CardContent>
         </Card>

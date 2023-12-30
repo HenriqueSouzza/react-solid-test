@@ -3,12 +3,6 @@ import { IconProps } from "@/interfaces";
 
 const Svg = styled.svg`
   animation: rotate 2s linear infinite;
-
-  @keyframes rotate {
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 `;
 
 export const Spinner = (props: IconProps) => (
