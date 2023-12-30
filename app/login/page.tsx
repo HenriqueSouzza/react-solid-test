@@ -61,8 +61,8 @@ const Login = () => {
             </Box>
             <Box css={FieldStyle}>
               <Input
+                id="name"
                 label="Username"
-                messageError="Campo obrigatorio"
                 type="text"
                 name="username"
                 placeholder="Digite..."
@@ -70,6 +70,7 @@ const Login = () => {
             </Box>
             <Box css={FieldStyle}>
               <Input
+                id="password"
                 label="Password"
                 type="text"
                 name="password"
