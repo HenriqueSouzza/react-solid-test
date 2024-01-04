@@ -1,8 +1,8 @@
 'use client'
 
 import React from "react";
-import { Card, Box } from "@/components";
-import { usePageLogin } from "@/hooks";
+import { Card, Box, Table } from "@/components";
+import { usePageDashboard } from "@/hooks";
 import { CssProps } from "@/interfaces";
 
 const BoxMainStyle: CssProps = {
@@ -28,66 +28,27 @@ const CardStyle: CssProps = {
   }
 }
 
-type userProps = {
-  id: number
-  name: string
-  Activities: number
-  Status: number
-}
-
 const Dashboard = () => {
-  const { onSubmit } = usePageLogin();
-
-  const userList = [
-    {
-      id: 1,
-      name: 'Junior Souza',
-      Activities: 50,
-      Status: 50,
-    },
-    {
-      id: 2,
-      name: 'Henrique Souza',
-      Activities: 50,
-      Status: 50,
-    },
-    {
-      id: 3,
-      name: 'João Mario',
-      Activities: 50,
-      Status: 50,
-    }
-  ];
+  const { onClickEdit, onClickDelete, userList } = usePageDashboard();
 
   return (
-    <form onSubmit={onSubmit}>
-      <Box component="section" css={BoxMainStyle}>
-        <Card css={CardStyle}>
-          <table>
-            <thead>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Activities</td>
-                <td>Status</td>
-                <td>Actions</td>
-              </tr>
-            </thead>
-            <tbody>
-              {userList.map((user: userProps) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.Activities}</td>
-                  <td>{user.Status}</td>
-                  <td>Actions</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
-      </Box>
-    </form>
+    <Box component="section" css={BoxMainStyle}>
+      <Card css={CardStyle}>
+        <Table
+          onClickEdit={onClickEdit}
+          onClickDelete={onClickDelete}
+          data={{
+            thead: {
+              id: '#',
+              name: 'Nome Completo',
+              lastName: 'Último nome',
+              age: 'Ativo'
+            },
+            tbody: userList,
+          }}
+        />
+      </Card>
+    </Box>
   )
 }
 

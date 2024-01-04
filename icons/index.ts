@@ -1,2 +1,4 @@
-export { Spinner } from './Spinner';
-export { AccountCircle } from './AccountCircle';
+export * from './Spinner';
+export * from './AccountCircle';
+export * from './ArchiveBox';
+export * from './PencilSquare';

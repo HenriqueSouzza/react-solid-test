@@ -1,5 +1,18 @@
-import { usePage } from "@/hooks/usePage";
+import { UserProps } from "@/interfaces";
+import { User as UserList } from "@/__mocks";
 
 export const usePageDashboard = () => {
-  usePage();
+  const onClickEdit = (item: UserProps) => {
+    console.log(item);
+  }
+
+  const onClickDelete = (item: UserProps) => {
+    console.log(item);
+  }
+
+  return {
+    onClickEdit,
+    onClickDelete,
+    userList: UserList,
+  }
 };
