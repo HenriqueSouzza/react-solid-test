@@ -93,7 +93,7 @@ const Container = styled.div<InputProps>`
   `}
 `;
 
-const InputGroup = ({ label = 'label', name, error, messageError, ...props }: InputProps) => (
+const InputGroup = ({ label = 'label', error, messageError, ...props }: InputProps) => (
   <Container error={error}>
     <label htmlFor={`${props.id}`}>{label}</label>
     <div>

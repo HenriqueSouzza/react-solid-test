@@ -4,5 +4,5 @@ export interface RequestProps {
 }
 
 export interface ResponseProps {
-  data: string
+  data: string | null
 }

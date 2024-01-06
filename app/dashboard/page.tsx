@@ -1,9 +1,10 @@
 'use client'
 
-import React from "react";
-import { Card, Box, Table } from "@/components";
+import React, { useState } from "react";
+import { Card, Box, Table, Button, Modal } from "@/components";
 import { usePageDashboard } from "@/hooks";
 import { CssProps } from "@/interfaces";
+import { UserPlus } from "@/icons";
 
 const BoxMainStyle: CssProps = {
   height: '100vh',
@@ -29,11 +30,34 @@ const CardStyle: CssProps = {
 }
 
 const Dashboard = () => {
-  const { onClickEdit, onClickDelete, userList } = usePageDashboard();
+  const {
+    onClickSignOut,
+    onClickEdit,
+    onClickDelete,
+    setShowModal,
+    userList,
+    showModal
+  } = usePageDashboard();
 
   return (
     <Box component="section" css={BoxMainStyle}>
+      <Modal
+        open={showModal}
+        showIconClose
+        onClickClose={() => setShowModal(!showModal)}
+      />
       <Card css={CardStyle}>
+        <Box component="div" css={{ display: 'flex', justifyContent: 'space-between', margin: '10px' }}>
+          <Button type="button" onClick={onClickSignOut}>
+            Sair
+          </Button>
+          <Button
+            type="button" onClick={() => setShowModal(!showModal)}
+            css={{ display: 'flex', alignItems: 'center', gap: '5px', background: 'purple' }}
+          >
+            <UserPlus width={20} />Novo Usuário
+          </Button>
+        </Box>
         <Table
           onClickEdit={onClickEdit}
           onClickDelete={onClickDelete}
@@ -42,7 +66,7 @@ const Dashboard = () => {
               id: '#',
               name: 'Nome Completo',
               lastName: 'Último nome',
-              age: 'Ativo'
+              age: 'Idade'
             },
             tbody: userList,
           }}

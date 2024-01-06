@@ -2,7 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { StorageBrowser } from "@/utils";
+import { StorageBrowser, userPermitted } from "@/utils";
 import { FormProps } from "@/interfaces";
 import { Constants } from "@/constants";
 
@@ -19,12 +19,19 @@ export const usePageLogin = (): UsePageLoginProps => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget).entries();
-    requestLogin(Object.fromEntries(formData));
+    const formObject = Object.fromEntries(formData);
+    const username = formObject.username as string;
+    const password = formObject.password as string;
+    const userValidated = userPermitted({ username, password });
+
+    if (userValidated) {
+      requestLogin(userValidated)
+    }
   }
 
   useEffect(() => {
     if (response.data) {
-      push('/dashboard');
+      push('/');
     }
   }, [response]);
 

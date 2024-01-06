@@ -72,7 +72,7 @@ const Login = () => {
               <Input
                 id="password"
                 label="Password"
-                type="text"
+                type="password"
                 name="password"
                 placeholder="Digite..."
               />

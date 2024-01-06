@@ -1,6 +1,6 @@
 import { CommonProps } from "@/interfaces";
 
-type ComponentProps = CommonProps;
+interface ComponentProps extends CommonProps { }
 
 export const Component = ({ className, children, component: Component = 'div', ...props }: ComponentProps) => {
   const { css, ...abstractProps } = props

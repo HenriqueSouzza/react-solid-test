@@ -6,9 +6,23 @@ const setItem = ({ key, value }: RequestProps): ResponseProps => {
 };
 
 const getItem = (key: RequestProps['key']): ResponseProps => {
-  return {
-    data: (sessionStorage.getItem(key) && String(sessionStorage.getItem(key))) || ''
+  let data = null
+
+  try {
+    data = JSON.parse(`${sessionStorage.getItem(key)}`)
+  } catch (error) {
+    return { data }
   }
+
+  if (!sessionStorage.getItem(key)) {
+    return { data }
+  }
+
+  if (!Object.keys(data).length) {
+    data = null
+  }
+
+  return { data }
 }
 
 export const StorageBrowser = {
