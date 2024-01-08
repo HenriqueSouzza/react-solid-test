@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { Card, Box, CardContent, Input, Button } from "@/components";
+import { Card, Box, Input, Button } from "@/components";
 import { usePageLogin } from "@/hooks";
 import { CssProps } from "@/interfaces";
 import { AccountCircle } from "@/icons";
@@ -15,26 +15,7 @@ const BoxMainStyle: CssProps = {
 }
 
 const CardStyle: CssProps = {
-  flexDirection: 'column',
-  width: '400px',
-  height: '400px',
-  backgroundColor: `rgba(255, 255, 255, 0.4)`,
-  borderRadius: '2px',
-  padding: '1px',
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-  '@media (max-width: 768px)': {
-    width: '100%',
-    height: '100vh',
-    padding: 0,
-  },
-}
-
-const CardContentStyle: CssProps = {
-  padding: '25px 10px',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '35px'
 }
 
 const FieldStyle: CssProps = {
@@ -52,37 +33,35 @@ const Login = () => {
     <form onSubmit={onSubmit}>
       <Box component="section" css={BoxMainStyle}>
         <Card css={CardStyle}>
-          <CardContent css={CardContentStyle}>
-            <Box css={FieldStyle}>
-              <AccountCircle
-                height={70}
-                width={70}
-              />
-            </Box>
-            <Box css={FieldStyle}>
-              <Input
-                id="name"
-                label="Username"
-                type="text"
-                name="username"
-                placeholder="Digite..."
-              />
-            </Box>
-            <Box css={FieldStyle}>
-              <Input
-                id="password"
-                label="Password"
-                type="password"
-                name="password"
-                placeholder="Digite..."
-              />
-            </Box>
-            <Box css={FieldStyle}>
-              <Button type="submit">
-                Sign in
-              </Button>
-            </Box>
-          </CardContent>
+          <Box css={FieldStyle}>
+            <AccountCircle
+              height={70}
+              width={70}
+            />
+          </Box>
+          <Box css={FieldStyle}>
+            <Input
+              id="name"
+              label="Username"
+              type="text"
+              name="username"
+              placeholder="Digite..."
+            />
+          </Box>
+          <Box css={FieldStyle}>
+            <Input
+              id="password"
+              label="Password"
+              type="password"
+              name="password"
+              placeholder="Digite..."
+            />
+          </Box>
+          <Box css={FieldStyle}>
+            <Button type="submit">
+              Sign in
+            </Button>
+          </Box>
         </Card>
       </Box>
     </form>
