@@ -12,8 +12,11 @@ export const usePageDashboard = () => {
     setShowModal(!showModal);
   }
 
-  const onClickCreateUser = (item: UserProps) => {
-    console.log(item)
+  const onClickCreateUser = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget).entries();
+    const formObject = Object.fromEntries(formData);
+    console.log(formObject);
   }
 
   const onClickEdit = (item: UserProps) => {

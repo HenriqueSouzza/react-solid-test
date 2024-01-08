@@ -33,7 +33,6 @@ const Container = styled.div<InputProps>`
       width: 100%;
       padding: 16px 14px;
       outline: none;
-      color: #fff;
       font-size: inherit;
       box-sizing: content-box;
       border-width: 0;

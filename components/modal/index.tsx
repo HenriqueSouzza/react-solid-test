@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
 import { CommonProps } from '@/interfaces';
 import { Close } from '@/icons';
@@ -20,12 +20,18 @@ const Background = styled.div`
 `;
 
 const Component = ({ open, showIconClose, children, onClickClose, ...props }: ModalProps) => {
+  const refBtnClose = useRef(null);
+
   if (!open) {
     return null;
   }
 
   const onClick = (e: MouseEvent) => {
-    if ((e.target as Element).tagName === 'DIALOG') {
+    if (refBtnClose.current && (refBtnClose.current as Element).className !== 'string') {
+      return;
+    }
+
+    if (!(e.target as Element).className.includes('background-modal')) {
       return;
     }
 
@@ -33,10 +39,10 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
   }
 
   return (
-    <Background onClick={onClick}>
+    <Background className='background-modal' onClick={onClick}>
       <dialog {...props}>
         {showIconClose && (
-          <button onClick={onClickClose}>
+          <button className='btn-close' ref={refBtnClose} onClick={onClickClose}>
             <Close width={25} />
           </button>
         )}
@@ -46,11 +52,11 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
   )
 }
 
-export const Modal = styled(Component)(({ css, children, showIconClose, ...props }: ModalProps) => {
+export const Modal = styled(Component)(({ css, children, showIconClose }: ModalProps) => {
   if (!children || !css) {
     css = {
       width: '50%',
-      height: '10%',
+      height: 'auto',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -61,10 +67,10 @@ export const Modal = styled(Component)(({ css, children, showIconClose, ...props
   if (showIconClose) {
     css = {
       ...css,
-      'button': {
+      '.btn-close': {
         position: 'absolute',
-        top: '10px',
-        right: '10px',
+        top: '5px',
+        right: '5px',
         background: 'transparent',
         cursor: 'pointer'
       }
@@ -72,13 +78,14 @@ export const Modal = styled(Component)(({ css, children, showIconClose, ...props
   }
 
   return {
+    padding: '30px 25px 15px 25px',
     position: 'relative',
     borderRadius: '5px',
     display: 'block',
     background: '#fff',
     '@media (max-width: 768px)': {
       width: '100%',
-      height: '100vh'
+      height: 'calc(100vh - 45px)',
     },
     ...css
   }

@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState } from "react";
-import { Card, Box, Table, Button, Modal } from "@/components";
+import React from "react";
+import { Card, Box, Table, Button, Modal, Input } from "@/components";
 import { usePageDashboard } from "@/hooks";
 import { CssProps } from "@/interfaces";
 import { UserPlus } from "@/icons";
@@ -15,13 +15,10 @@ const BoxMainStyle: CssProps = {
 }
 
 const CardStyle: CssProps = {
-  flexDirection: 'column',
   width: '90%',
   height: '90vh',
   backgroundColor: `rgba(255, 255, 255, .7)`,
-  borderRadius: '2px',
   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-  padding: '1px',
   '@media (max-width: 768px)': {
     width: '100%',
     height: '100vh',
@@ -33,6 +30,7 @@ const Dashboard = () => {
   const {
     onClickSignOut,
     onClickEdit,
+    onClickCreateUser,
     onClickDelete,
     setShowModal,
     userList,
@@ -42,10 +40,55 @@ const Dashboard = () => {
   return (
     <Box component="section" css={BoxMainStyle}>
       <Modal
-        open={showModal}
+        open={!showModal}
         showIconClose
         onClickClose={() => setShowModal(!showModal)}
-      />
+      >
+        <form style={{ display: "flex", flexDirection: 'column', gap: '35px' }} onSubmit={onClickCreateUser}>
+          <Box css={{ display: 'flex' }}>
+            <Input
+              id="firstName"
+              label="Primeiro nome"
+              type="text"
+              name="firstName"
+              placeholder="Primeiro nome"
+            />
+            <Input
+              id="lastName"
+              label="Último nome"
+              type="text"
+              name="lastName"
+              placeholder="Último nome"
+            />
+          </Box>
+          <Box>
+            <Input
+              id="age"
+              label="Idade"
+              type="number"
+              name="age"
+              placeholder="Digite sua idade"
+            />
+          </Box>
+          <Box css={{
+            '@media (max-width: 768px)': {
+              position: 'absolute',
+              bottom: '20px',
+              right: '20px',
+              left: '20px'
+            }
+          }}>
+            <Button type="submit">
+              Cadastrar
+            </Button>
+            {false && (
+              <Button type="submit">
+                Alterar
+              </Button>
+            )}
+          </Box>
+        </form>
+      </Modal>
       <Card css={CardStyle}>
         <Box component="div" css={{ display: 'flex', justifyContent: 'space-between', margin: '10px' }}>
           <Button type="button" onClick={onClickSignOut}>
@@ -72,7 +115,7 @@ const Dashboard = () => {
           }}
         />
       </Card>
-    </Box>
+    </Box >
   )
 }
 
