@@ -1,16 +1,20 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 import styled from "styled-components";
 import { CssProps } from "@/interfaces";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   css?: CssProps
   fullWidth?: boolean
+  $outlined?: boolean
+  $noborder?: boolean
   onClick?: () => void
 }
 
-const Component = ({ fullWidth, ...props }: ButtonProps) => <button {...props} />;
+const Component = forwardRef<HTMLButtonElement, ButtonProps>(({ fullWidth, ...props }, ref) => {
+  return <button ref={ref} {...props} />
+});
 
-export const Button = styled(Component)(({ css, fullWidth }: ButtonProps) => {
+export const Button = styled(Component)(({ css, fullWidth, $outlined, $noborder }: ButtonProps) => {
   if (fullWidth) {
     css = {
       ...css,
@@ -19,8 +23,24 @@ export const Button = styled(Component)(({ css, fullWidth }: ButtonProps) => {
     }
   }
 
+  if ($outlined) {
+    css = {
+      ...css,
+      color: '#363636',
+      boxShadow: 'none',
+      border: '2px solid #4801FF',
+      background: 'transparent',
+    }
+  }
+
+  if ($noborder) {
+    css = {
+      ...css,
+      border: 0,
+    }
+  }
+
   return {
-    borderWidth: '0',
     borderRadius: '4px',
     background: 'linear-gradient(-225deg, #AC32E4 0%, #7918F2 48%, #4801FF 100%)',
     color: '#ffff',

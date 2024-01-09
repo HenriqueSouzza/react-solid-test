@@ -40,7 +40,7 @@ const Dashboard = () => {
   return (
     <Box component="section" css={BoxMainStyle}>
       <Modal
-        open={!showModal}
+        open={showModal}
         showIconClose
         onClickClose={() => setShowModal(!showModal)}
       >

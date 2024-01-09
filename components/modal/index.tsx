@@ -1,7 +1,8 @@
-import { MouseEvent, useRef } from 'react';
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 import { CommonProps } from '@/interfaces';
 import { Close } from '@/icons';
+import { Button } from '@/components';
 
 interface ModalProps extends CommonProps {
   open?: boolean
@@ -19,19 +20,25 @@ const Background = styled.div`
   justify-content: center;
 `;
 
-const Component = ({ open, showIconClose, children, onClickClose, ...props }: ModalProps) => {
-  const refBtnClose = useRef(null);
+const ButtonClose = styled(Button)(() => ({
+  position: 'absolute',
+  top: 0,
+  right: 0,
+}));
 
+const Component = ({ open, showIconClose, children, onClickClose, ...props }: ModalProps) => {
   if (!open) {
     return null;
   }
 
   const onClick = (e: MouseEvent) => {
-    if (refBtnClose.current && (refBtnClose.current as Element).className !== 'string') {
+    const refClassName = (e.target as Element).className;
+
+    if (!refClassName || typeof refClassName !== 'string') {
       return;
     }
 
-    if (!(e.target as Element).className.includes('background-modal')) {
+    if (!refClassName.includes('background-modal')) {
       return;
     }
 
@@ -42,9 +49,14 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
     <Background className='background-modal' onClick={onClick}>
       <dialog {...props}>
         {showIconClose && (
-          <button className='btn-close' ref={refBtnClose} onClick={onClickClose}>
+          <ButtonClose
+            $noborder
+            $outlined
+            className='btn-close'
+            onClick={onClickClose}
+          >
             <Close width={25} />
-          </button>
+          </ButtonClose>
         )}
         {children || 'Sem conteúdo para apresentar'}
       </dialog>
@@ -52,7 +64,7 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
   )
 }
 
-export const Modal = styled(Component)(({ css, children, showIconClose }: ModalProps) => {
+export const Modal = styled(Component)(({ css, children }: ModalProps) => {
   if (!children || !css) {
     css = {
       width: '50%',
@@ -61,19 +73,6 @@ export const Modal = styled(Component)(({ css, children, showIconClose }: ModalP
       alignItems: 'center',
       justifyContent: 'center',
       ...css,
-    }
-  }
-
-  if (showIconClose) {
-    css = {
-      ...css,
-      '.btn-close': {
-        position: 'absolute',
-        top: '5px',
-        right: '5px',
-        background: 'transparent',
-        cursor: 'pointer'
-      }
     }
   }
 

@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
   input:-webkit-autofill:focus, 
   input:-webkit-autofill:active{
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #ffffff;
     transition: background-color 5000s ease-in-out 0s;
   }
 
