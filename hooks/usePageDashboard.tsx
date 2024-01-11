@@ -4,37 +4,66 @@ import { User } from "@/__mocks";
 import { Constants } from "@/constants";
 import { useRouter } from "next/navigation";
 
+interface ShowModalDashboardProps {
+  create?: boolean
+  edit?: boolean
+  delete?: boolean
+}
+
 export const usePageDashboard = () => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<ShowModalDashboardProps>({
+    create: false,
+    edit: false,
+    delete: false,
+  });
   const [userList, setUserList] = useState<Array<UserProps>>(User);
   const [userSelected, setUserSelected] = useState<UserProps>();
   const { push } = useRouter();
 
-  const onClickControlModal = () => {
-    setShowModal(!showModal);
+  const resetShowModal = () => {
+    showModal.create = false
+    showModal.edit = false
+    showModal.delete = false
+
+    setShowModal({ ...showModal });
   }
 
   const onSubmitForm = (dataForm: UserProps) => {
-    if (!userSelected) {
+    if (showModal.create) {
       userList.push(Object.assign({ id: userList.length + 1 }, dataForm))
     }
 
-    if (userSelected?.id) {
-      userList[userSelected?.id] = Object.assign({ id: userSelected?.id }, dataForm)
+    const keyUser = userList.findIndex(user => user.id === userSelected?.id);
+
+    if (showModal.edit && userSelected) {
+      userList.splice(keyUser, 1, Object.assign({ id: userSelected?.id }, dataForm))
+    }
+
+    if (showModal.delete) {
+      userList.splice(keyUser, 1)
     }
 
     setUserList(userList);
-    setShowModal(!showModal);
+    resetShowModal();
   }
 
-  const onClickEdit = (item: UserProps) => {
+  const onClickSetShowModal = (value: ShowModalDashboardProps) => {
+    resetShowModal();
+    setShowModal({ ...showModal, ...value });
+  }
+
+  const onClickCreate = () => {
+    onClickSetShowModal({ create: !showModal.create });
+  }
+
+  const onClickEdit = (item?: UserProps) => {
     setUserSelected(item);
-    onClickControlModal();
+    onClickSetShowModal({ edit: !showModal.edit });
   }
 
-  const onClickDelete = (item: UserProps) => {
-    const userListCurrent = userList.filter(user => user.id !== item.id)
-    setUserList(userListCurrent);
+  const onClickDelete = (item?: UserProps) => {
+    setUserSelected(item);
+    onClickSetShowModal({ delete: !showModal.delete });
   }
 
   const onClickSignOut = () => {
@@ -44,10 +73,11 @@ export const usePageDashboard = () => {
 
   return {
     onClickSignOut,
-    onSubmitForm,
     onClickEdit,
+    onClickCreate,
     onClickDelete,
-    setShowModal,
+    onSubmitForm,
+    onClickSetShowModal,
     userList,
     userSelected,
     showModal

@@ -1,14 +1,10 @@
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
-import { CommonProps } from '@/interfaces';
+import { CommonProps, ModalProps as ModalCommonProps } from '@/interfaces';
 import { Close } from '@/icons';
 import { Button } from '@/components';
 
-interface ModalProps extends CommonProps {
-  open?: boolean
-  showIconClose?: boolean
-  onClickClose: () => void
-}
+type ModalProps = ModalCommonProps & CommonProps & {}
 
 const Background = styled.div`
   width: 100%;
@@ -42,7 +38,7 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
       return;
     }
 
-    onClickClose();
+    onClickClose && onClickClose();
   }
 
   return (
