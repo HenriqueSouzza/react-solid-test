@@ -14,6 +14,8 @@ const Component = forwardRef<HTMLButtonElement, ButtonProps>(({ fullWidth, ...pr
   return <button ref={ref} {...props} />
 });
 
+Component.displayName = 'Component';
+
 export const Button = styled(Component)(({ css, fullWidth, $outlined, $noborder }: ButtonProps) => {
   if (fullWidth) {
     css = {
