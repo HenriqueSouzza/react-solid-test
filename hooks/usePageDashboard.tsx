@@ -30,7 +30,7 @@ export const usePageDashboard = () => {
 
   const onSubmitForm = (dataForm: UserProps) => {
     if (showModal.create) {
-      userList.push(Object.assign({ id: userList.length + 1 }, dataForm))
+      userList.push(Object.assign({ id: userList[userList.length - 1].id + 1 }, dataForm))
     }
 
     const keyUser = userList.findIndex(user => user.id === userSelected?.id);
