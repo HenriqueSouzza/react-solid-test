@@ -1,30 +1,40 @@
 import { useState } from "react";
 import { UserProps } from "@/interfaces";
-import { User as userList } from "@/__mocks";
+import { User } from "@/__mocks";
 import { Constants } from "@/constants";
 import { useRouter } from "next/navigation";
 
 export const usePageDashboard = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [userList, setUserList] = useState<Array<UserProps>>(User);
+  const [userSelected, setUserSelected] = useState<UserProps>();
   const { push } = useRouter();
 
   const onClickControlModal = () => {
     setShowModal(!showModal);
   }
 
-  const onClickCreateUser = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget).entries();
-    const formObject = Object.fromEntries(formData);
-    console.log(formObject);
+  const onSubmitForm = (dataForm: UserProps) => {
+    if (!userSelected) {
+      userList.push(Object.assign({ id: userList.length + 1 }, dataForm))
+    }
+
+    if (userSelected?.id) {
+      userList[userSelected?.id] = Object.assign({ id: userSelected?.id }, dataForm)
+    }
+
+    setUserList(userList);
+    setShowModal(!showModal);
   }
 
   const onClickEdit = (item: UserProps) => {
+    setUserSelected(item);
     onClickControlModal();
   }
 
   const onClickDelete = (item: UserProps) => {
-    onClickControlModal();
+    const userListCurrent = userList.filter(user => user.id !== item.id)
+    setUserList(userListCurrent);
   }
 
   const onClickSignOut = () => {
@@ -34,11 +44,12 @@ export const usePageDashboard = () => {
 
   return {
     onClickSignOut,
-    onClickCreateUser,
+    onSubmitForm,
     onClickEdit,
     onClickDelete,
     setShowModal,
     userList,
+    userSelected,
     showModal
   }
 };

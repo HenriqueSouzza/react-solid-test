@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { Card, Box, Table, Button, Modal, Input } from "@/components";
+import { Card, Box, Table, Button, Modal, Input, Form } from "@/components";
 import { usePageDashboard } from "@/hooks";
 import { CssProps } from "@/interfaces";
 import { UserPlus } from "@/icons";
@@ -30,10 +30,11 @@ const Dashboard = () => {
   const {
     onClickSignOut,
     onClickEdit,
-    onClickCreateUser,
+    onSubmitForm,
     onClickDelete,
     setShowModal,
     userList,
+    userSelected,
     showModal
   } = usePageDashboard();
 
@@ -44,50 +45,64 @@ const Dashboard = () => {
         showIconClose
         onClickClose={() => setShowModal(!showModal)}
       >
-        <form style={{ display: "flex", flexDirection: 'column', gap: '35px' }} onSubmit={onClickCreateUser}>
-          <Box css={{ display: 'flex' }}>
-            <Input
-              id="firstName"
-              label="Primeiro nome"
-              type="text"
-              name="firstName"
-              placeholder="Primeiro nome"
-            />
-            <Input
-              id="lastName"
-              label="Último nome"
-              type="text"
-              name="lastName"
-              placeholder="Último nome"
-            />
-          </Box>
-          <Box>
-            <Input
-              id="age"
-              label="Idade"
-              type="number"
-              name="age"
-              placeholder="Digite sua idade"
-            />
-          </Box>
+        <Form onSubmit={onSubmitForm}>
           <Box css={{
-            '@media (max-width: 768px)': {
-              position: 'absolute',
-              bottom: '20px',
-              right: '20px',
-              left: '20px'
-            }
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '35px'
           }}>
-            <Button type="submit">
-              Cadastrar
-            </Button>
-            {false && (
-              <Button type="submit">
-                Alterar
-              </Button>
-            )}
+            <Box css={{ display: 'flex' }}>
+              <Input
+                id="firstName"
+                label="Primeiro nome"
+                type="text"
+                name="firstName"
+                placeholder="Primeiro nome"
+                defaultValue={userSelected?.firstName}
+              />
+              <Input
+                id="lastName"
+                label="Último nome"
+                type="text"
+                name="lastName"
+                placeholder="Último nome"
+                defaultValue={userSelected?.lastName}
+              />
+            </Box>
+            <Box>
+              <Input
+                id="age"
+                label="Idade"
+                type="number"
+                name="age"
+                placeholder="Digite sua idade"
+                defaultValue={userSelected?.age}
+              />
+            </Box>
+            <Box>
+              {!userSelected && (
+                <Button
+                  css={{
+                    '@media (max-width: 768px)': {
+                      position: 'absolute',
+                      bottom: '20px',
+                      right: '20px',
+                      left: '20px',
+                    }
+                  }}
+                  type="submit"
+                >
+                  Cadastrar
+                </Button>
+              )}
+              {userSelected?.id && (
+                <Button type="submit">
+                  Alterar
+                </Button>
+              )}
+            </Box>
           </Box>
-        </form>
+        </Form>
       </Modal>
       <Card css={CardStyle}>
         <Box component="div" css={{ display: 'flex', justifyContent: 'space-between', margin: '10px' }}>
@@ -107,7 +122,7 @@ const Dashboard = () => {
           data={{
             thead: {
               id: '#',
-              name: 'Nome Completo',
+              firstName: 'Nome Completo',
               lastName: 'Último nome',
               age: 'Idade'
             },
@@ -115,7 +130,7 @@ const Dashboard = () => {
           }}
         />
       </Card>
-    </Box >
+    </Box>
   )
 }
 

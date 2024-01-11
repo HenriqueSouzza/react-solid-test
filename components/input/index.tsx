@@ -18,7 +18,7 @@ const Container = styled.div<InputProps>`
 
   label {
     transform-origin: left top;
-    transform: translate(14px, -9px) scale(0.75);
+    transform: translate(14px, -3px) scale(0.75);
     position: absolute;
     top: 0;
     left: 0;
@@ -31,7 +31,7 @@ const Container = styled.div<InputProps>`
 
     input {
       width: 100%;
-      padding: 16px 14px;
+      padding: 20px 14px 15px 14px;
       outline: none;
       font-size: inherit;
       box-sizing: content-box;
@@ -42,7 +42,7 @@ const Container = styled.div<InputProps>`
 
     fieldset {
       padding: 0 10px;
-      inset: -5px 0px 0px;
+      inset: 0;
       border-color: #993399;
       border-width: 2px;
       border-radius: 5px;

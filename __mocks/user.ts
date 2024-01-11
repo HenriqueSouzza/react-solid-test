@@ -3,19 +3,19 @@ import { UserProps } from "@/interfaces";
 export const User: Array<UserProps> = [
   {
     id: 1,
-    name: 'Junior',
+    firstName: 'Junior',
     lastName: 'Souza',
     age: 20,
   },
   {
     id: 2,
-    name: 'Henrique',
+    firstName: 'Henrique',
     lastName: 'Souza',
     age: 25,
   },
   {
     id: 3,
-    name: 'João',
+    firstName: 'João',
     lastName: 'Mario',
     age: 24,
   }

@@ -1,6 +1,6 @@
 export interface UserProps {
   id: number
-  name: string
+  firstName: string
   lastName: string
   age: number
 }

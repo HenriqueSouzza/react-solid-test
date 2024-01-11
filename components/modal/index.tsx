@@ -65,19 +65,18 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
 }
 
 export const Modal = styled(Component)(({ css, children }: ModalProps) => {
-  if (!children || !css) {
+  if (!children && !css) {
     css = {
       width: '50%',
       height: 'auto',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      ...css,
     }
   }
 
   return {
-    padding: '30px 25px 15px 25px',
+    padding: '35px',
     position: 'relative',
     borderRadius: '5px',
     display: 'block',
