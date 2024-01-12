@@ -59,4 +59,4 @@ export const ModalCreateUser = ({ onSubmit, ...props }: ModalCreateUserProps) =>
       </Box>
     </Form>
   </Modal>
-)
+);

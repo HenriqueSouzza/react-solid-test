@@ -1,3 +1,3 @@
-export * from './createUser/page';
-export * from './editUser/page';
-export * from './deleteUser/page';
+export * from './createUser';
+export * from './editUser';
+export * from './deleteUser';
