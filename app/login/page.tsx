@@ -11,12 +11,8 @@ const Login = () => {
   const { valueInserted, onSubmit } = usePageLogin();
   const { loading, isUserLogged } = useAuth();
 
-  if (!loading && isUserLogged) {
+  if ((valueInserted) || (!loading && isUserLogged)) {
     redirect('/dashboard');
-  }
-
-  if (valueInserted) {
-    redirect('/');
   }
 
   return (
