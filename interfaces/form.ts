@@ -1,3 +1,3 @@
 export interface FormProps {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  onSubmit: (item: any) => void
 }

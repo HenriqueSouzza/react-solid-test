@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { Card, Box, Input, Button } from "@/components";
+import { Card, Box, Input, Button, Form } from "@/components";
 import { usePageLogin } from "@/hooks";
 import { CssProps } from "@/interfaces";
 import { AccountCircle } from "@/icons";
@@ -30,7 +30,7 @@ const Login = () => {
   const { onSubmit } = usePageLogin();
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       <Box component="section" css={BoxMainStyle}>
         <Card css={CardStyle}>
           <Box css={FieldStyle}>
@@ -64,7 +64,7 @@ const Login = () => {
           </Box>
         </Card>
       </Box>
-    </form>
+    </Form>
   )
 }
 

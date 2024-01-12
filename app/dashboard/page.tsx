@@ -1,10 +1,12 @@
 'use client'
 
 import React from "react";
-import { Card, Box, Table, Button, Modal, Input, Form } from "@/components";
-import { usePageDashboard } from "@/hooks";
-import { CssProps, ModalProps, UserProps } from "@/interfaces";
+import { Card, Box, Table, Button } from "@/components";
+import { useAuth, usePageDashboard } from "@/hooks";
+import { CssProps } from "@/interfaces";
 import { UserPlus } from "@/icons";
+import { ModalCreateUser, ModalDeleteUser, ModalEditUser } from "./modal";
+import { redirect } from "next/navigation";
 
 const BoxMainStyle: CssProps = {
   height: '100vh',
@@ -26,157 +28,8 @@ const CardStyle: CssProps = {
   }
 }
 
-interface ModalUserProps extends ModalProps {
-  onSubmit: (item: any) => void
-  initialValues?: UserProps
-}
-
-const ModalCreateUser = ({ onSubmit, ...props }: ModalUserProps) => (
-  <Modal
-    {...props}
-    showIconClose
-  >
-    <Form onSubmit={onSubmit}>
-      <Box css={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '35px'
-      }}>
-        <Box css={{ display: 'flex' }}>
-          <Input
-            id="firstName"
-            label="Primeiro nome"
-            type="text"
-            name="firstName"
-            placeholder="Primeiro nome"
-          />
-          <Input
-            id="lastName"
-            label="Último nome"
-            type="text"
-            name="lastName"
-            placeholder="Último nome"
-          />
-        </Box>
-        <Box>
-          <Input
-            id="age"
-            label="Idade"
-            type="number"
-            name="age"
-            placeholder="Digite sua idade"
-          />
-        </Box>
-        <Box>
-          <Button
-            css={{
-              '@media (max-width: 768px)': {
-                position: 'absolute',
-                bottom: '20px',
-                right: '20px',
-                left: '20px',
-              }
-            }}
-            type="submit"
-          >
-            Cadastrar
-          </Button>
-        </Box>
-      </Box>
-    </Form>
-  </Modal>
-)
-
-const ModalEditUser = ({ onSubmit, initialValues, ...props }: ModalUserProps) => (
-  <Modal
-    {...props}
-    showIconClose
-  >
-    <Form onSubmit={onSubmit}>
-      <Box css={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '35px'
-      }}>
-        <Box css={{ display: 'flex' }}>
-          <Input
-            id="firstName"
-            label="Primeiro nome"
-            type="text"
-            name="firstName"
-            placeholder="Primeiro nome"
-            defaultValue={initialValues?.firstName}
-          />
-          <Input
-            id="lastName"
-            label="Último nome"
-            type="text"
-            name="lastName"
-            placeholder="Último nome"
-            defaultValue={initialValues?.lastName}
-          />
-        </Box>
-        <Box>
-          <Input
-            id="age"
-            label="Idade"
-            type="number"
-            name="age"
-            placeholder="Digite sua idade"
-            defaultValue={initialValues?.age}
-          />
-        </Box>
-        <Box>
-          <Button
-            css={{
-              '@media (max-width: 768px)': {
-                position: 'absolute',
-                bottom: '20px',
-                right: '20px',
-                left: '20px',
-              }
-            }}
-            type="submit"
-          >
-            Alterar
-          </Button>
-        </Box>
-      </Box>
-    </Form>
-  </Modal>
-)
-
-const ModalDeleteUser = ({ onSubmit, ...props }: ModalUserProps) => (
-  <Modal
-    {...props}
-    showIconClose
-  >
-    <Form onSubmit={onSubmit}>
-      <Box css={{
-        display: 'flex',
-        gap: '35px',
-        flexDirection: 'column'
-      }}>
-        Tem certeza que deseja remover esse usuário?
-        <Button
-          css={{
-            '@media (max-width: 768px)': {
-              position: 'absolute',
-              bottom: '20px',
-              right: '20px',
-              left: '20px',
-            }
-          }}
-          type="submit"
-        >
-          Remover usuário
-        </Button>
-      </Box>
-    </Form>
-  </Modal>
-)
-
 const Dashboard = () => {
+  const { isUserLogged } = useAuth();
   const {
     onClickSignOut,
     onClickCreate,
@@ -188,6 +41,10 @@ const Dashboard = () => {
     userSelected,
     showModal
   } = usePageDashboard();
+
+  if (!isUserLogged) {
+    redirect('/');
+  }
 
   return (
     <Box component="section" css={BoxMainStyle}>
@@ -206,7 +63,6 @@ const Dashboard = () => {
         open={showModal.delete}
         onSubmit={onSubmitForm}
         onClickClose={() => onClickSetShowModal({ delete: !showModal.delete })}
-        initialValues={userSelected}
       />
       <Card css={CardStyle}>
         <Box component="div" css={{ display: 'flex', justifyContent: 'space-between', margin: '10px' }}>

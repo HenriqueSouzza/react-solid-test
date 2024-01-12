@@ -1,4 +1,3 @@
-export { usePage } from './usePage';
-export { useRedirectLogin } from './useRedirectLogin';
+export { useAuth } from './useAuth';
 export { usePageLogin } from './usePageLogin';
 export { usePageDashboard } from './usePageDashboard';
