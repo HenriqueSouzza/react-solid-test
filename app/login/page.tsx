@@ -2,9 +2,10 @@
 
 import React from "react";
 import { Card, Box, Input, Button, Form } from "@/components";
-import { usePageLogin } from "@/hooks";
+import { useAuth, usePageLogin } from "@/hooks";
 import { CssProps } from "@/interfaces";
 import { AccountCircle } from "@/icons";
+import { redirect } from "next/navigation";
 
 const BoxMainStyle: CssProps = {
   height: '100vh',
@@ -28,6 +29,11 @@ const FieldStyle: CssProps = {
 
 const Login = () => {
   const { onSubmit } = usePageLogin();
+  const { loading, isUserLogged } = useAuth()
+
+  if (!loading && isUserLogged) {
+    redirect('/dashboard');
+  }
 
   return (
     <Form onSubmit={onSubmit}>

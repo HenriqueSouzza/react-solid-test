@@ -29,7 +29,7 @@ const CardStyle: CssProps = {
 }
 
 const Dashboard = () => {
-  const { isUserLogged } = useAuth();
+  const { isUserLogged, loading } = useAuth();
   const {
     onClickSignOut,
     onClickCreate,
@@ -42,7 +42,7 @@ const Dashboard = () => {
     showModal
   } = usePageDashboard();
 
-  if (!isUserLogged) {
+  if (!loading && !isUserLogged) {
     redirect('/');
   }
 
