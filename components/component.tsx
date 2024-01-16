@@ -1,3 +1,4 @@
+import React from "react";
 import { CommonProps } from "@/interfaces";
 
 interface ComponentProps extends CommonProps { }
