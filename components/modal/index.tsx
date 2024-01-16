@@ -1,3 +1,4 @@
+import React from "react";
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
 import { CommonProps, ModalProps as ModalCommonProps } from '@/interfaces';
