@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Component } from ".";
 
 describe('Component', () => {
-  it('should component with tag button', () => {
+  it('should render component with tag button', () => {
     const { getByText } = render(<Component component='main' />);
     const tagName = getByText(({ }, element) => element?.tagName.toLowerCase() === 'main');
     expect(tagName).toBeInTheDocument();

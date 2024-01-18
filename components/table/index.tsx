@@ -3,11 +3,7 @@ import { CommonProps } from '@/interfaces';
 import { Component } from '@/components';
 import React from 'react';
 import { ArchiveBox, PencilSquare } from '@/icons';
-
-interface DataTableProps {
-  thead: any
-  tbody: any
-}
+import { DataTableProps } from '@/interfaces/table';
 
 interface TableProps extends CommonProps {
   data: DataTableProps
@@ -17,7 +13,7 @@ interface TableProps extends CommonProps {
 
 const TableGroup = ({ data, onClickDelete, onClickEdit, ...props }: TableProps) => (
   <Component component='table' {...props}>
-    <thead>
+    <thead data-testid='thead'>
       <tr>
         {Object.values(data.thead).map((head: typeof data.thead, index: number) => (
           <td key={index}>{head}</td>
@@ -27,7 +23,7 @@ const TableGroup = ({ data, onClickDelete, onClickEdit, ...props }: TableProps) 
         )}
       </tr>
     </thead>
-    <tbody>
+    <tbody data-testid='tbody'>
       {data.tbody.map((row: typeof data.tbody, index: number) => (
         <tr key={index}>
           {Object.values(row).map((value: typeof row, index: number) => (
@@ -35,12 +31,12 @@ const TableGroup = ({ data, onClickDelete, onClickEdit, ...props }: TableProps) 
           ))}
           <td className='td-action'>
             {onClickEdit && (
-              <button onClick={() => onClickEdit(row)}>
+              <button data-testid="btn-edit" onClick={() => onClickEdit(row)}>
                 <PencilSquare width={20} />
               </button>
             )}
             {onClickDelete && (
-              <button onClick={() => onClickDelete(row)}>
+              <button data-testid="btn-delete" onClick={() => onClickDelete(row)}>
                 <ArchiveBox width={20} />
               </button>
             )}

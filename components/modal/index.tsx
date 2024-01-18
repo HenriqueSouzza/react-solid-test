@@ -43,12 +43,13 @@ const Component = ({ open, showIconClose, children, onClickClose, ...props }: Mo
   }
 
   return (
-    <Background className='background-modal' onClick={onClick}>
+    <Background data-testid='background-modal' className='background-modal' onClick={onClick}>
       <dialog {...props}>
         {showIconClose && (
           <ButtonClose
             $noborder
             $outlined
+            data-testid='btn-close'
             className='btn-close'
             onClick={onClickClose}
           >
