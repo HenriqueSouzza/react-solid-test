@@ -6,7 +6,7 @@ import { Component } from '@/components';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   css?: CssProps
   label?: string
-  error?: boolean
+  error?: boolean | number
   messageError?: string
 }
 

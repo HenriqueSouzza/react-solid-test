@@ -28,6 +28,10 @@ const config: Config = {
     "./icons/**/*.{js,jsx,ts,tsx}",
     "./utils/**/*.{js,jsx,ts,tsx}",
     "./app/**/*.{js,jsx,ts,tsx}",
+    "!./**/style.{js,jsx,ts,tsx}",
+    "!./components/index.{js,jsx,ts,tsx}",
+    "!./icons/index.{js,jsx,ts,tsx}",
+    "!./utils/index.{js,jsx,ts,tsx}",
   ],
 
   // The directory where Jest should output its coverage files

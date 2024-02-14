@@ -7,7 +7,7 @@ const Svg = styled.svg`
 `;
 
 export const Spinner = (props: IconProps) => (
-  <Svg fill="none" viewBox="0 0 24 24" height={props.height && `${props.height}px`} width={props.width && `${props.width}px`}>
+  <Svg fill="none" data-testid={props.testId || 'Spinner'} viewBox="0 0 24 24" height={props.height && `${props.height}px`} width={props.width && `${props.width}px`}>
     <path
       fill="currentColor"
       fillRule="evenodd"
