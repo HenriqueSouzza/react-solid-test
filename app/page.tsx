@@ -1,14 +1,17 @@
 'use client'
 
-import { useAuth } from "@/hooks"
-import { redirect } from "next/navigation";
+import { useEffect } from "react";
+import { usePage } from "@/hooks";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-  const { isUserLogged } = useAuth();
+  const { authenticated } = usePage();
+  const { push } = useRouter();
 
-  if (!isUserLogged) {
-    redirect('/login')
-  }
-
-  redirect('/dashboard')
+  useEffect(() => {
+    if (authenticated) {
+      push('/dashboard')
+    }
+    push('/login')
+  }, [push, authenticated]);
 }

@@ -2,14 +2,12 @@
 
 import React from "react";
 import { Card, Box, Table, Button } from "@/components";
-import { useAuth, usePageDashboard } from "@/hooks";
+import { usePageDashboard } from "@/hooks";
 import { UserPlus } from "@/icons";
 import { ModalCreateUser, ModalDeleteUser, ModalEditUser } from "./modal";
-import { redirect } from "next/navigation";
 import { BoxMainStyle, CardStyle } from "./style";
 
 const Dashboard = () => {
-  const { isUserLogged, loading } = useAuth();
   const {
     onClickSignOut,
     onClickCreate,
@@ -21,10 +19,6 @@ const Dashboard = () => {
     userSelected,
     showModal
   } = usePageDashboard();
-
-  if (!loading && !isUserLogged) {
-    redirect('/');
-  }
 
   return (
     <Box component="section" css={BoxMainStyle}>

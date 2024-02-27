@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import StyledComponentsRegistry from '@/lib/registry';
 import { ChildrenProps } from '@/interfaces';
+import ContextProvider from '@/provider/context-provider';
 
 export const metadata: Metadata = {
   title: 'Conceitos teste',
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: LoginLayoutProps) {
     <html lang="pt-br">
       <body>
         <StyledComponentsRegistry>
-          {children}
+          <ContextProvider>
+            {children}
+          </ContextProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

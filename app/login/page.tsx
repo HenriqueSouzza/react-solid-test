@@ -1,19 +1,13 @@
 'use client'
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Box, Input, Button, Form } from "@/components";
-import { useAuth, usePageLogin } from "@/hooks";
+import { useAppContext, usePageLogin } from "@/hooks";
 import { AccountCircle } from "@/icons";
-import { redirect } from "next/navigation";
 import { BoxMainStyle, CardStyle, FieldStyle } from "./style";
 
 const Login = () => {
-  const { valueInserted, onSubmit } = usePageLogin();
-  const { loading, isUserLogged } = useAuth();
-
-  if ((valueInserted) || (!loading && isUserLogged)) {
-    redirect('/dashboard');
-  }
+  const { onSubmit } = usePageLogin();
 
   return (
     <Form onSubmit={onSubmit}>

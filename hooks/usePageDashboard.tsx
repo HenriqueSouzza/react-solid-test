@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserProps } from "@/interfaces";
 import { User } from "@/__mocks";
 import { Constants } from "@/constants";
 import { useRouter } from "next/navigation";
+import { AuthActions } from "@/store";
+import { useAppContext } from ".";
 
 interface ShowModalDashboardProps {
   create?: boolean
@@ -19,6 +21,7 @@ export const usePageDashboard = () => {
   const [userList, setUserList] = useState<Array<UserProps>>(User);
   const [userSelected, setUserSelected] = useState<UserProps>();
   const { push } = useRouter();
+  const { dispatch, state } = useAppContext();
 
   const resetShowModal = () => {
     showModal.create = false
@@ -68,7 +71,8 @@ export const usePageDashboard = () => {
 
   const onClickSignOut = () => {
     sessionStorage.removeItem(Constants.SessionStorage.session);
-    push('/');
+    dispatch(AuthActions.getAuth());
+    push('/')
   }
 
   return {
