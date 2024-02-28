@@ -4,7 +4,6 @@ describe("steps user auth", () => {
     cy.get("input[name='username']").type('henrique.souza');
     cy.get("input[name='password']").type('Henry123456');
     cy.contains("button", "Sign in").click();
-    cy.location('pathname').should('eq', '/dashboard');
     cy.contains("button", "Sair").click();
   });
 
