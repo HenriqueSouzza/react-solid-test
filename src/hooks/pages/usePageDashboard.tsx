@@ -79,7 +79,7 @@ export const usePageDashboard = () => {
     if (!state.auth.authenticated) {
       push('/')
     }
-  }, [push]);
+  }, [push, state]);
 
   return {
     onClickSignOut,
