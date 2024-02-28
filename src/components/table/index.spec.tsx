@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { Table } from ".";
-import { dataTableEmptyMock, dataTableMock } from '@/__mocks';
+import { dataTableEmptyMock, dataTableMock } from '@/__mocks__';
 
 describe('Table', () => {
   const dataTestIds = {

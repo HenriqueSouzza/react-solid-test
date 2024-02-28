@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { UserProps } from "@/interfaces";
-import { User } from "@/__mocks";
+import { User } from "@/__mocks__";
 import { Constants } from "@/constants";
 import { useRouter } from "next/navigation";
 import { AuthActions } from "@/store";
-import { useAppContext } from ".";
+import { useAppContext } from "..";
 
 interface ShowModalDashboardProps {
   create?: boolean

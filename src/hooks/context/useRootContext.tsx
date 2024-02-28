@@ -1,6 +1,6 @@
 
-import { InitialValuesAuth, rootReducer } from "@/store";
 import { useMemo, useReducer } from "react";
+import { InitialValuesAuth, rootReducer } from "@/store";
 
 export const InitialValues = {
   ...InitialValuesAuth
