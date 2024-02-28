@@ -4,7 +4,7 @@ import { User } from "@/__mocks__";
 import { Constants } from "@/constants";
 import { useRouter } from "next/navigation";
 import { AuthActions } from "@/store";
-import { useAppContext } from "..";
+import { useAppContext } from "@/hooks";
 
 interface ShowModalDashboardProps {
   create?: boolean

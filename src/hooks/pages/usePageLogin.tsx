@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { StorageBrowser, generateHash, userFind } from "@/utils";
 import { AuthProps } from "@/interfaces";
 import { useAppContext } from "@/hooks";
 import { AuthActions } from "@/store";
 import { Constants } from "@/constants";
-import { useRouter } from "next/navigation";
 
 export const usePageLogin = () => {
   const { state, dispatch } = useAppContext();
