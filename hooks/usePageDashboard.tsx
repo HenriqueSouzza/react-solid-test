@@ -21,7 +21,7 @@ export const usePageDashboard = () => {
   const [userList, setUserList] = useState<Array<UserProps>>(User);
   const [userSelected, setUserSelected] = useState<UserProps>();
   const { push } = useRouter();
-  const { dispatch, state } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   const resetShowModal = () => {
     showModal.create = false
@@ -74,6 +74,12 @@ export const usePageDashboard = () => {
     dispatch(AuthActions.getAuth());
     push('/')
   }
+
+  useEffect(() => {
+    if (!state.auth.authenticated) {
+      push('/')
+    }
+  }, [push]);
 
   return {
     onClickSignOut,

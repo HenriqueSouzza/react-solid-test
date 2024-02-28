@@ -30,7 +30,7 @@ export const usePageLogin = () => {
 
   useEffect(() => {
     dispatch(AuthActions.getAuth());
-  }, [dispatch])
+  }, [dispatch]);
 
   return {
     userAuthenticated: state.auth.authenticated,

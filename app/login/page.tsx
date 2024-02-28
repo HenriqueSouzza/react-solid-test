@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, Box, Input, Button, Form } from "@/components";
-import { useAppContext, usePageLogin } from "@/hooks";
+import { usePageLogin } from "@/hooks";
 import { AccountCircle } from "@/icons";
 import { BoxMainStyle, CardStyle, FieldStyle } from "./style";
 

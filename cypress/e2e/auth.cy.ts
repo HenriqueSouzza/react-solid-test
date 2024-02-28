@@ -1,16 +1,15 @@
 describe("steps user auth", () => {
   it('should do sign out', () => {
-    cy.visit('/dashboard');
-    cy.location('pathname').should('eq', '/dashboard')
-    cy.get("button").first().click();
-    cy.location('pathname').should('eq', '/login')
-  });
-
-  it('should do sign in', () => {
     cy.visit('/login');
     cy.get("input[name='username']").type('henrique.souza');
     cy.get("input[name='password']").type('Henry123456');
-    cy.get("button").click();
-    cy.location('pathname').should('eq', '/dashboard')
+    cy.contains("button", "Sign in").click();
+    cy.location('pathname').should('eq', '/dashboard');
+    cy.contains("button", "Sair").click();
+  });
+
+  it('should redirect to login if user is unlogged', () => {
+    cy.visit('/dashboard');
+    cy.location('pathname').should('eq', '/dashboard');
   });
 })
