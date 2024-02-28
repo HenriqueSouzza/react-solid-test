@@ -1,6 +1,9 @@
 describe("dashboard", () => {
   beforeEach(() => {
-    cy.visit('/dashboard');
+    cy.visit('/login');
+    cy.get("input[name='username']").type('henrique.souza');
+    cy.get("input[name='password']").type('Henry123456');
+    cy.contains("button", "Sign in").click();
   });
 
   it('should add user on the table', () => {
